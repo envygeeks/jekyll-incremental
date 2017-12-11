@@ -1,0 +1,50 @@
+language: ruby
+after_success: script/report
+before_script: script/report before
+script: script/test
+sudo: false
+cache:
+  bundler: true
+  directories:
+    - vendor/bundle
+    - node_modules
+env:
+  global:
+    secure: "\
+      eQgiiBDysF665s/PAvqHsZ/kdt5O8Us/JxpksxW7iBdyP+IVTsaBEfmn1arXb3nVQO0g9csvQ\
+      02KdMU6lPFGhfa24Eeo1SPqHM7kuX+z8Kdz07sPaYW1uZliQDZl0CMkamP8LX0xwJ4AbnuS2H\
+      V49KZrLwHK9/D+AI1GuqiD3kQsTa3VHw2ffxtz/3HxJZNflfWdJ2HQSsdXa3MW5c1MscOOYKa\
+      RxpbQMkI3LxHLxs9Ap9MpV9KkpDmfIoiAjs6p68cASXjSqhwmL97RLvFVvNV8u9rN5f0K4qzt\
+      N4Kzyq+d4leFgAz1mCXDL7R9rwXntYG2mOsWNqhyeDsC0Nk5lYKnwqAbQojxAq8XKOOfz4Pev\
+      +iAyvq3M1hjtSAYsKCIFwrPAqAfhvxpKKNZj9xK+8riFfLsotCM+qBKzt2/4M9kJJel3OV3Zr\
+      C45JchxlQneUIhroeeZU8u+lhWk4r1eJAxktlLhfGCQvSw9ZpdRdfLMwvXTKM+FgSS9ivDU4w\
+      dZtIwJJavZ0bZBnKQujx0uFMYGGvv8XEyYGXO2/D0/x7JvUBowLSKw72GJ2t00u3NkvOZVoBb\
+      O4uv6LmnaXmHlWzJEsJI3chHbSOEmqyw2ieWx1aUO/XF7QHck0+IJJ8F9kJKoQjLma+DS9M/s\
+      E60Xa/3DAaGrkRNXy7tR57Lc9I=
+    "
+  matrix:
+    - LIQUID_VERSION="~> 4.0"
+    - LINTING=true
+rvm:
+  - 2.4
+  - 2.3
+  - jruby-head
+  - ruby-head
+matrix:
+  fast_finish: true
+  allow_failures:
+    - rvm: jruby-head
+    - rvm: ruby-head
+  exclude:
+    - { rvm: 2.3, env: LINTING=true }
+    - { rvm: jruby-head, env: LINTING=true }
+    - { rvm: ruby-head,  env: LINTING=true }
+notifications:
+  email:
+    recipients:
+      - jordon@envygeeks.io
+    on_success: change
+    on_failure: change
+branches:
+  only:
+    - master
