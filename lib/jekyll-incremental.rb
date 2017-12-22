@@ -3,6 +3,8 @@
 # Copyright: 2017 - Apache 2.0 License
 # Encoding: utf-8
 
+require "jekyll/cache"
+
 module Jekyll
   module Incremental
     FORCE_KEYS = %w(regenerate force force_regenerate regen).freeze
@@ -150,10 +152,15 @@ module Jekyll
     # If they do then we'll readd them properly someway.
     # These shouldn't cause problems.
     # --
-    %i(metadata_file clear_cache read_metadata).each do |v|
+    %i(clear_cache read_metadata).each do |v|
       define_method v do |*|
         nil
       end
+    end
+
+    # --
+    def metadata_file
+      site.in_source_dir(".jekyll-metadata")
     end
   end
 end
