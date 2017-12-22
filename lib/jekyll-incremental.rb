@@ -32,7 +32,7 @@ module Jekyll
     def regenerate?(doc)
       return false unless doc.write?
       return true if forced_by_data?(doc)
-      return true if doc.asset_file?
+      return true if doc&.asset_file?
       modified?(doc)
     end
 
