@@ -6,6 +6,12 @@
 require "jekyll/cache"
 
 module Jekyll
+  # --
+  # @note we replace theirs in-place.
+  # @example bundle exec jekyll b --incremental
+  # A replacement of Jekyll's Regenerator.  That does a
+  #   few things a bit differently, most things.
+  # --
   module Incremental
     FORCE_KEYS = %w(regenerate force force_regenerate regen).freeze
     CACHE_KEY  = "jekyll:regenerator:metadata"
@@ -167,6 +173,11 @@ end
 
 # --
 module Jekyll
+  # --
+  # Patches Jekyll's own regenerator, and replaces it with
+  #   our regenerator, which should in theory be more efficient
+  #   than Jekyll's since it does less work.
+  # --
   class Regenerator
     prepend Jekyll::Incremental
   end
