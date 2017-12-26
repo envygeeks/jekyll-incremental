@@ -8,7 +8,7 @@
 
 Jekyll Incremental is a more simple, and to the point version of incremental generation for Jekyll.  It also tries to solve the shortfalls of Jekyll's own incremental regeneration by treating all things equal, dynamic, doc, post, or collection.  As long as we can get the path, we will track it and make sure it gets generated.  It has an almost backwards compatible API (as far as adding dependencies, and dependent's) and merges several other API's in favor of a single, simple interface to track everything.
 
-## Usage
+## Installation
 
 ```ruby
 gem "jekyll-reload", {
@@ -16,4 +16,11 @@ gem "jekyll-reload", {
 }
 ```
 
-And use the `--incremental` option on the command line interface.
+## Usage
+
+By default we replace Jekyll's internal regenerator with our own, so you would use ours the same way you would use theirs.  This allows us to stay out of your way and for you not to have to adjust any workflows.
+
+```ruby
+bundle exec jekyll b \
+  --incremental
+```
