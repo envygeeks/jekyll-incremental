@@ -1,4 +1,11 @@
 # --
+# 😞
+# Even though I target a specific version,
+#   a gem might still be looser.
+# --
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+# --
 # 🤭
 # My classes, modules, and methods rarely reach this
 #   length, but sometimes they do, like Pathutil.
@@ -207,7 +214,7 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 # --
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.3
   Exclude:
     - examples/**/*
     - node_modules/**/*

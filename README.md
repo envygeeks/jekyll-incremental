@@ -1,6 +1,4 @@
 [![Code Climate](https://img.shields.io/codeclimate/maintainability/anomaly/jekyll-incremental.svg?style=for-the-badge)](https://codeclimate.com/github/anomaly/jekyll-incremental/maintainability)
-[![Code Climate](https://img.shields.io/codeclimate/coverage/github/anomaly/jekyll-incremental.svg?style=for-the-badge)](https://codeclimate.com/github/anomaly/jekyll-incremental/test_coverage)
-[![Travis CI](https://img.shields.io/travis/anomaly/jekyll-incremental/master.svg?style=for-the-badge)](https://travis-ci.org/anomaly/jekyll-incremental)
 ![Gem Version](https://img.shields.io/gem/v/jekyll-incremental.svg?style=for-the-badge)
 ![Gem DL](https://img.shields.io/gem/dt/jekyll-incremental.svg?style=for-the-badge)
 
