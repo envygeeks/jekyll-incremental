@@ -38,10 +38,12 @@ module Jekyll
     #   whether the file has been modified.
     # --
     def regenerate?(doc)
-      return false unless doc.write?
-      return true if doc.respond_to?(:asset_file?) && doc.asset_file?
-      return true if forced_by_data?(doc)
-      modified?(doc)
+      out = false unless doc.write?
+      out = true if doc.respond_to?(:asset_file?) && doc.asset_file?
+      out = true if forced_by_data?(doc)
+      out = modified?(doc)
+
+      out
     end
 
     # --
@@ -63,14 +65,18 @@ module Jekyll
     # rubocop:disable Metrics/PerceivedComplexity
     # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/LineLength
+    # rubocop:disable Metrics/AbcSize
     # --
     def modified?(doc)
       return true if metadata[doc.path]&.[](:forced)
+      return true unless File.exist?(site.in_dest_dir(doc.path))
       modified, hash = file_mtime_of(doc.path), metadata[doc.path]
       return modified > hash[:last_modified] if hash && !hash[:dynamic] && hash[:seen_before]
       return hash[:seen_before] = true if hash && !hash[:seen_before]
       return dependencies_modified?(hash) if hash
       add(doc.path).update(seen_before: true)
+
+      true
     end
 
     # --
@@ -102,7 +108,7 @@ module Jekyll
       return metadata[path] if metadata.key?(path)
       metadata[path] = {
         seen_before: false,
-        dynamic: !File.exist?(path),
+        dynamic: !File.exist?(site.in_source_dir(path)),
         last_modified: file_mtime_of(path),
         dependencies: Set.new,
         forced: forced,
