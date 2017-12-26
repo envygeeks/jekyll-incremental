@@ -43,6 +43,12 @@ module Jekyll
       out = true if forced_by_data?(doc)
       out = modified?(doc)
 
+      # --
+      # Make sure they know.
+      # --
+      Jekyll.logger.debug "Incremental" do
+        "#{out} for #{doc.path}"
+      end
       out
     end
 
