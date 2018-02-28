@@ -9,7 +9,7 @@ Jekyll Incremental is a more simple, and to the point version of incremental gen
 ## Installation
 
 ```ruby
-gem "jekyll-reload", {
+gem "jekyll-incremental", {
   group: "jekyll-plugins"
 }
 ```
